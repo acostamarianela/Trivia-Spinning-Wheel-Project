@@ -4,5 +4,5 @@ from config import app
 
 @app.route('/')
 def ruleta():
-    return render_template('/views/ruleta.html')
+    return render_template('ruleta.html')
 
