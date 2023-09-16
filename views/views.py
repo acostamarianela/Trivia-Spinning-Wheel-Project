@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask import render_template,url_for, Blueprint
 from flask_login import current_user
-from extensions import db
+from config import db
 views = Blueprint('views', __name__)
 #                                                   error handler´s functions
 @views.errorhandler(404)
