@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/ruleta.css') }}"> <!-- Agrega la línea para tu archivo CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> 
+    <!-- cambiar sintaxis de esto -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/ruleta.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/ruleta.js') }}"></script>
 
@@ -12,10 +13,26 @@
     <div id="wrapper">
         <div id="wheel">
             <div id="inner-wheel">
-                <div class="sec"><span class="fa fa-bello-o"></span></div>
-                <div class="sec"><span class="fa fa-comment-o"></span></div>
-                <div class="sec"><span class="fa fa-smile-o"></span></div>
-                <div class="sec"><span class="fa fa-heart-o"></span></div>
+                <div class="sec">
+                    <span id="lanzamientos">
+                        LANZAMIENTOS
+                    </span>
+                </div>
+                <div class="sec">
+                    <span class="genero">
+                        GÉNERO
+                    </span>
+                </div>
+                <div class="sec">
+                    <span id="musica-internacional">
+                        MÚSICA INTERNACIONAL
+                    </span>
+                </div>
+                <div class="sec">
+                    <span id="musica-nacional">
+                        MÚSICA NACIONAL
+                    </span>
+                </div>
             </div>       
            
             <div id="spin">
