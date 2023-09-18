@@ -61,49 +61,23 @@ a{
 	
 }
 
-#musica-nacional {
-	text-align: center;
-    display: flex;
-    justify-content: center; /* Centra horizontalmente el contenido */
-    align-items: center; /* Centra verticalmente el contenido */
-    height: 100%;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: sans-serif;
-    color: #000000;
-  }
-
 #inner-wheel div.sec:nth-child(1){
 	transform: rotate(90deg);
-	-webkit-transform: rotate(90deg);
-	-moz-transform: rotate(90deg);
-	-o-transform: rotate(90deg);
-	-ms-transform: rotate(90deg);
-	border-color: #16a085 transparent;	
+	border-color: #eeff00 transparent;	
 }
+
 #inner-wheel div.sec:nth-child(2){
 	transform: rotate(180deg);
-	-webkit-transform: rotate(180deg);
-	-moz-transform: rotate(180deg);
-	-o-transform: rotate(180deg);
-	-ms-transform: rotate(180deg);
-	border-color: #2980b9 transparent;	
+	border-color: #296892 transparent;	
 }
+
 #inner-wheel div.sec:nth-child(3){
 	transform: rotate(270deg);
-	-webkit-transform: rotate(270deg);
-	-moz-transform: rotate(270deg);
-	-o-transform: rotate(270deg);
-	-ms-transform: rotate(270deg);
-	border-color: #34495e transparent;	
+	border-color: #ff0000 transparent;	
 }
 #inner-wheel div.sec:nth-child(4){
 	transform: rotate(360deg);
-	-webkit-transform: rotate(360deg);
-	-moz-transform: rotate(360deg);
-	-o-transform: rotate(360deg);
-	-ms-transform: rotate(360deg);
-	border-color: #f39c12 transparent;	
+	border-color: #55f312 transparent;	
 }
 
 
