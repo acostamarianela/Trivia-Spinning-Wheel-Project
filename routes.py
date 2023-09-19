@@ -8,7 +8,8 @@ def obtenerPreguntas():
     categoria = request.args.get('categoria')
     preguntas = PreguntasController()
     preguntaAleatoria = preguntas.getPreguntasPorCategoria(categoria)
-    return jsonify({"pregunta": preguntaAleatoria})
+    #print(preguntaAleatoria)
+    return render_template('pregunta.html', pregunta=preguntaAleatoria)
 
 
 @app.route('/')

@@ -12,12 +12,7 @@
     <!-- Quiz Box -->
     <div id="quiz" class="quiz">
       <h1>Quiz</h1>
-      <hr />
-      {% if preguntaAleatoria %}
-      <h1 id="question">{{ preguntaAleatoria }}</h1>
-      {% else %}
-      <p></p>
-      {% endif %}
+      <h1>{{ pregunta }}</h1><hr />
       
       
       <div id="choices"></div>

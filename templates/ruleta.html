@@ -6,34 +6,46 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/ruleta.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/ruleta.js') }}"></script>
+
+
 </head>
 <body>
-    <div id="wrapper">
-        <div id="wheel">
-            <div id="inner-wheel">
-                <div class="sec">
-                    <span id="lanzamientos">
-                    </span>
-                </div>
-                <div class="sec">
-                    <span id="genero">
-                    </span>
-                </div>
-                <div class="sec">
-                    <span id="musica-internacional">
-                    </span>
-                </div>
-                <div class="sec">
-                    <span id="musica-nacional">
-                    </span>
-                </div>
-            </div>       
-           
-            <div id="spin">
-                <div id="inner-spin"></div>
-            </div>
+    
             
+    <div id="wheel">
+        <div id="inner-wheel">
+            <div class="sec"> </div>
+            <div class="sec"></div>
+            <div class="sec"></div>
+            <div class="sec"></div>
+
+        </div>       
+        
+        <div id="spin">
+            <div id="inner-spin"></div>
         </div>
+        
+
+    </div>
+    <div class="menu">
+        <h5 id="lanzamientos" class="categoria">
+            <img src="https://www.colorhexa.com/eeff00.png" alt="mensaje" class="icono">
+            LANZAMIENTOS
+        </h5>
+        <h5 id="generos" class="categoria">
+            <img src="https://www.colorhexa.com/296892.png" class="icono">
+            GENEROS
+        </h5>
+        <h5 id="musica-nacional" class="categoria">
+            <img src="https://www.colorcombos.com/images/colors/FF0000.png" class="icono">
+            MUSICA NACIONAL
+        </h5>
+        <h5 id="musica-internacional" class="categoria">
+            <img src = 'https://www.colorhexa.com/55f312.png' class="icono">
+            MUSICA INTERNACIONAL
+        </h5>
+    </div>
+
         
   </div>
 </body>

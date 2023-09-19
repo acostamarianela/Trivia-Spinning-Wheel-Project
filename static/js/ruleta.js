@@ -49,6 +49,7 @@ function enviarCategoria(categoria) {
         data: { categoria: categoria },
         success: function(response) {
             console.log('Pregunta aleatoria:', response);
+            window.location.href = '/pregunta?categoria=' + categoria;
 
         },
         error: function(error) {

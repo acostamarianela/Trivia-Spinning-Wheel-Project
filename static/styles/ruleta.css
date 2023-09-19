@@ -154,7 +154,49 @@ a{
 	font-size:15px;	
 }
 
+/* ESTILO DEL MENU DE LAS CATEGORIAS*/
 
+.menu {
+    background-color: grey;
+    padding: 20px;
+    text-align: left;
+	position: absolute; /* coloca el menú de manera absoluta */
+    top: 0; /* coloca el menú en la parte superior */
+    left: 0; /* coloca el menú en la izquierda */
+
+}
+.categoria {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.icono {
+    width: 20px; 
+    height: 20px; 
+    margin-right: 10px; 
+}
+
+#lanzamientos {
+    color: black;
+    font-size: 18px;
+}
+
+
+#generos {
+    color: black;
+    font-size: 18px;
+}
+
+
+#musica-nacional {
+    color: black;
+	font-size: 18px;
+}
+
+#musica-internacional {
+    color: black;
+	font-size: 18px;
+}
 
 /*ANIMATION*/
 @-webkit-keyframes hh {
