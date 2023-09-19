@@ -35,8 +35,26 @@ $(document).ready(function(){
             var seccionDespuesDeAnimacion = Math.floor((gradosActuales + 45) / 90) % 4;
 
             console.log('La flecha está apuntando a la sección:', seccionDespuesDeAnimacion);
+            console.log(typeof seccionDespuesDeAnimacion);
+            // Envía la categoría al servidor Flask y obtén una pregunta aleatoria
+            enviarCategoria(seccionDespuesDeAnimacion);
         }, 4000); // 4000 milisegundos (4 segundos) es la duración de la animación
     });
 });
+
+function enviarCategoria(categoria) {
+    $.ajax({
+        type: 'GET',
+        url: '/pregunta',
+        data: { categoria: categoria },
+        success: function(response) {
+            console.log('Pregunta aleatoria:', response);
+
+        },
+        error: function(error) {
+            console.error('Error al enviar la categoría:', error);
+        }
+    });
+}
 
 	

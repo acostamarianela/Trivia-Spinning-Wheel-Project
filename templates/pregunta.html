@@ -4,27 +4,30 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Javascript Quiz</title>
+    <title>Quiz</title>
     <link rel="stylesheet" href="static/styles/pregunta.css" />
+    
   </head>
   <body>
     <!-- Quiz Box -->
     <div id="quiz" class="quiz">
       <h1>Quiz</h1>
       <hr />
-
-      <h1 id="question"></h1>
-
+      {% if preguntaAleatoria %}
+      <h1 id="question">{{ preguntaAleatoria }}</h1>
+      {% else %}
+      <p></p>
+      {% endif %}
+      
+      
       <div id="choices"></div>
-
-      <hr style="margin-top: 50px" />
+        <button class="button"></button>
+      
 
       <footer>
         <p id="progress">Questions x of y</p>
       </footer>
     </div>
 
-    <!-- Scripts -->
-    <script src="./app.js" type="module"></script>
   </body>
 </html>
