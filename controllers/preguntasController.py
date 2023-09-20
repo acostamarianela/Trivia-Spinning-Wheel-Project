@@ -1,4 +1,4 @@
-#rom models.preguntasModel import PreguntasModel
+from models.preguntasModel import PreguntasModel
 from flask import flash, redirect, url_for
 import random
 from config import app, mysql
