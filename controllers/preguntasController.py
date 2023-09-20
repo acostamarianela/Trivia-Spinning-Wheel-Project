@@ -1,6 +1,7 @@
-from models.preguntasModel import PreguntasModel
+#rom models.preguntasModel import PreguntasModel
 from flask import flash, redirect, url_for
 import random
+from config import app, mysql
 
 class PreguntasController:
     def __init__(self):
