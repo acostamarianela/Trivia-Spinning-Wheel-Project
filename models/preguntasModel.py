@@ -7,7 +7,6 @@ class PreguntasModel:
         self.database = mysql.connection
 
     def listPreguntas(self):
-
         # Crear un cursor para ejecutar consultas usando el bloque with.
         with self.database.cursor() as cursor:
 
@@ -21,7 +20,6 @@ class PreguntasModel:
         return resultados
     
     def listPreguntasPorCategoria(self, categoria):
-        # Aquí va la lógica para obtener los datos del cliente por su ID
         with self.database.cursor() as cursor:
             consulta = """
             SELECT p.descripcionPregunta

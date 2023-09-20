@@ -4,25 +4,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz</title>
+    <title>PREGUNTA</title>
     <link rel="stylesheet" href="static/styles/pregunta.css" />
+    <script src="{{ url_for('static', filename='js/pregunta.js') }}"></script>
   </head>
   <body>
     <!-- Quiz Box -->
     <div id="quiz" class="quiz">
-      <p class="pregunta">
+      <p id="pregunta">
         {{ pregunta }}
       </p>
       <ul>
         {% for respuesta in respuestas %}
-        <li class="respuesta {% if respuesta.correcta %}correcta{% else %}incorrecta{% endif %}">
-          {{ respuesta.descripcionRespuesta }}
-        </li>
+        <li> <button class="button {% if respuesta.correcta %}correcta{% else %}incorrecta{% endif %}">
+        {{ respuesta.descripcionRespuesta }}
+        </button></li>  
         {% endfor %}
       </ul>
-      <footer>
-        <p id="progress">Questions x of y</p>
-      </footer>
     </div>
   </body>
 </html>
