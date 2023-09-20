@@ -7,9 +7,9 @@ from controllers.preguntasController import *
 def obtenerPreguntas():
     categoria = request.args.get('categoria')
     preguntas = PreguntasController()
-    preguntaAleatoria = preguntas.getPreguntasPorCategoria(categoria)
+    pregunta, respuestas = preguntas.getPreguntasPorCategoria(categoria)
     #print(preguntaAleatoria)
-    return render_template('pregunta.html', pregunta=preguntaAleatoria)
+    return render_template('pregunta.html', pregunta=pregunta, respuestas=respuestas)
 
 
 @app.route('/')

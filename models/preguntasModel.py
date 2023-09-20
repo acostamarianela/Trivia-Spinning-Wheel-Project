@@ -6,37 +6,56 @@ class PreguntasModel:
     def __init__(self):
         self.database = mysql.connection
 
-    def ListClients(self):
+    def listPreguntas(self):
 
         # Crear un cursor para ejecutar consultas usando el bloque with.
         with self.database.cursor() as cursor:
 
-            # Construir la sentencia SQL para listar los clientes.
-            sql_listar = "SELECT p.nombre, p.apellido, p.telefono, c.fechaRegistro, c.preferencias, c.condicionesEspeciales, c.idCliente FROM clientes c LEFT JOIN personas p ON p.idPersona = c.idPersona"
-            cursor.execute(sql_listar)
+            sqlListarPreguntas = "SELECT p.*, c.descripcionCategoria FROM preguntas p JOIN categoria c ON p.idCategoria = c.idCategoria;"
+            cursor.execute(sqlListarPreguntas)
 
             # Guardar en la variable resultados todos los resultados devueltos por la consulta.
             resultados = cursor.fetchall()
             print(resultados)
 
         return resultados
-
-    def get_client_by_id(self, idClient):
-
-        self.id_client = idClient
-
+    
+    def listPreguntasPorCategoria(self, categoria):
         # Aquí va la lógica para obtener los datos del cliente por su ID
         with self.database.cursor() as cursor:
-            query = "SELECT p.nombre, p.apellido, p.telefono, c.fechaRegistro, c.preferencias, c.condicionesEspeciales, c.idCliente, p.idPersona FROM clientes c, personas p WHERE c.idCliente = %s and c.idPersona = p.idPersona"
-            cursor.execute(query, (self.id_client,))
-            client = cursor.fetchone()
+            consulta = """
+            SELECT p.descripcionPregunta
+            FROM preguntas p
+            JOIN categoria c ON p.idCategoria = c.idCategoria
+            WHERE c.descripcionCategoria = %s
+            ORDER BY RAND()
+            LIMIT 1
+            """
+            cursor.execute(consulta, (categoria,))
+            fila = cursor.fetchone()
+            if fila:
+                pregunta_aleatoria = fila[0]
+            else:
+                pregunta_aleatoria = None
 
-        # Confirmar los cambios en la base de datos.
-        self.database.commit()
+        if pregunta_aleatoria:
+            # Una vez que tengas la pregunta aleatoria, busca todas sus respuestas
+            with self.database.cursor() as cursor:
+                consulta_respuestas = """
+                SELECT r.descripcionRespuesta, r.correcta
+                FROM respuestas r
+                JOIN preguntas p ON r.idPregunta = p.idPregunta
+                WHERE p.descripcionPregunta = %s
+                """
+                cursor.execute(consulta_respuestas, (pregunta_aleatoria,))
+                respuestas = []
+                for fila in cursor.fetchall():
+                    respuesta, correcta = fila
+                    respuestas.append({
+                        'descripcionRespuesta': respuesta,
+                        'correcta': bool(correcta)
+                    })
+        else:
+            respuestas = []
 
-        # Si el cliente no existe, devolver None
-        if client is None:
-            return None
-
-        # Devolver los datos del cliente
-        return client
+        return pregunta_aleatoria, respuestas

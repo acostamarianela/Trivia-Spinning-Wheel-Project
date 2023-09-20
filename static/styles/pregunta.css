@@ -3,6 +3,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Exo 2', sans-serif;
+  font-size: 18px;
 }
 
 body {
@@ -65,4 +66,23 @@ h1 {
 #btn2:focus,
 #btn3:focus {
   outline: 0;
+}
+
+.pregunta {
+  margin-bottom: 20px;
+}
+
+.respuesta {
+  margin-left: 20px;
+  list-style-type: none;
+}
+
+.respuesta.correcta {
+  color: green;
+  font-weight: bold;
+}
+
+.respuesta.incorrecta {
+  color: red;
+  font-weight: bold;
 }
