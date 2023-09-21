@@ -37,10 +37,10 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`idCategoria`, `descripcionCategoria`) VALUES
-(1, 'lanzamientos'),
-(2, 'generos'),
-(3, 'musica nacional'),
-(4, 'musica internacional');
+(1, 'LANZAMIENTO'),
+(2, 'GENERO'),
+(3, 'MUSICA NACIONAL'),
+(4, 'MUSICA INTERNACIONAL');
 
 -- --------------------------------------------------------
 
