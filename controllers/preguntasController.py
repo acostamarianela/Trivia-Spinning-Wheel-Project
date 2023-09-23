@@ -8,7 +8,6 @@ class PreguntasController:
         self.preguntasModel = PreguntasModel()
         self.error = None
 
-
     def getPreguntasPorCategoria(self, categoria):
         # Esta función podría consultar una base de datos u otro origen de datos
         # para obtener preguntas según la categoría y devolverlas en una lista.

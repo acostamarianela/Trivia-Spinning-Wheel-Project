@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Insertar Jugador</title>
+</head>
+<body>
+    <h1>Insertar Nuevo Jugador</h1>
+    <form action="/insertarJugador" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required><br><br>
+
+        <!-- Campo oculto para el puntaje, puedes configurarlo según tus necesidades -->
+        <input type="hidden" id="puntaje" name="puntaje" value="0">
+
+        <input type="submit" value="Guardar">
+    </form>
+</body>
+</html>

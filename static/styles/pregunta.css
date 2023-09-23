@@ -60,3 +60,30 @@ ul {
   border: 2px solid rgb(0, 217, 255);
 }
 
+/* Estilos para la barra de progreso y el texto de progreso */
+.progress {
+  position: absolute;
+  top: 610px;
+  right: center; /* Ajusta la distancia desde la derecha según sea necesario */
+  width: 35%; /* Aumenta el ancho de la barra de progreso */
+  background-color: #007bff;
+  color: #fff;
+  font-size: 12px; /* Reducido aún más el tamaño del texto */
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
