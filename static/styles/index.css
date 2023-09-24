@@ -1,0 +1,38 @@
+/* Define una clase personalizada para centrar verticalmente el contenido en la página */
+.center-page {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos verticalmente */
+    align-items: center; /* Alinea el contenido hacia el centro */
+    min-height: 600px; /* Esto establece la altura mínima al 600px */
+    justify-content: center; /* Centra verticalmente el contenido */
+}
+
+/* Estilo personalizado para el título "REGISTRATE" */
+.titulo-registro {
+    font-size: 24px; /* Cambia el tamaño de fuente según tus preferencias */
+    margin-bottom: 20px; /* Agrega espacio debajo del título */
+    font-weight: bold;
+}
+
+.medium-card {
+ /* Cambia el color de fondo de .medium-card a amarillo */
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilo personalizado para la clase custom-input */
+.custom-input {
+    margin-bottom: 20px;
+}
+
+/* Estilo personalizado para la clase input-container */
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo personalizado para los íconos */
+.custom-input i {
+    margin-right: 10px; /* Espacio entre el ícono y el campo de entrada */
+}

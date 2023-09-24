@@ -11,22 +11,28 @@
   </head>
   <body>
     <!-- Quiz Box -->
-    <div id="quiz" class="quiz">
-      <p id="pregunta">
-        {{ pregunta }}
-      </p>
-      <ul>
-        {% for respuesta in respuestas %}
-        <li> <button class="button {% if respuesta.correcta %}correcta{% else %}incorrecta{% endif %}">
+<div id="quiz" class="quiz">
+  <p id="pregunta">
+    {{ pregunta }}
+  </p>
+  <ul>
+    {% for respuesta in respuestas %}
+    <li> 
+      <button class="button {% if respuesta.correcta %}correcta{% else %}incorrecta{% endif %}">
         {{ respuesta.descripcionRespuesta }}
-        </button></li>  
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="progress" style="height: 50px;">
+      </button>
+    </li>  
+    {% endfor %}
+  </ul>
+
+  <!-- Barra de progreso dentro del cuadro del cuestionario -->
+  <div class="progress-container">
+    <div class="progress" style="height: 50px;"> 
       <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-          <span id="progress-text" class="progress-text" style="font-size: 25px;">30 SEGUNDOS</span>
+        <span id="progress-text" class="progress-text" style="font-size: 25px; font-weight: bolder;">20 SEGUNDOS</span>
       </div>
+    </div>
   </div>
+</div>
   </body>
 </html>

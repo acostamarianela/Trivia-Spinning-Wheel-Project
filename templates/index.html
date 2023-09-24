@@ -3,20 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Insertar Jugador</title>
+    <link rel="stylesheet" href="static/styles/index.css" />
+    <!-- Agrega la referencia a Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Agrega la referencia a Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
-<body>
-    <h1>Insertar Nuevo Jugador</h1>
-    <form action="/insertarJugador" method="post">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required><br><br>
+<body class="center-page"> <!-- Agrega la clase center-page en el body -->
+    <h1>BIENVENIDOS AL TRIVIAL MUSICAL</h1> <!-- Mantiene el título "BIENVENIDOS" en la parte superior -->
+    <div class="container mt-5">
+        <div class="card medium-card mx-auto" style="background-color: paleturquoise"> <!-- Aplica mx-auto para centrar horizontalmente -->
+            <div class="card-body">
+                <h1 class="card-title titulo-registro text-center"><i class="fa-solid fa-id-card"></i> REGISTRATE</h1> <!-- Aplica estilos al título --><br>
+                <form action="/insertarJugador" method="post">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa-solid fa-user-plus"></i></i></span>
+                        </span>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="ingrese su nombre" required>
+                    </div>
+                    <br>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa-solid fa-user-tag"></i></i></span>
+                        </span>
+                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="ingrese su apellido" required>
+                    </div>
 
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" required><br><br>
-
-        <!-- Campo oculto para el puntaje, puedes configurarlo según tus necesidades -->
-        <input type="hidden" id="puntaje" name="puntaje" value="0">
-
-        <input type="submit" value="Guardar">
-    </form>
+                    <!-- Campo oculto para el puntaje, puedes configurarlo según tus necesidades -->
+                    <br>
+                    <input type="hidden" id="puntaje" name="puntaje" value="0">
+                    <div class="d-flex justify-content-center"> <!-- Agrega las clases para centrar verticalmente -->
+                        <button type="submit" class="btn btn-lg btn-success my-3" style="font-weight: bolder; letter-spacing: 1px;">¡JUGAR!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Agrega la referencia a Bootstrap JS (opcional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

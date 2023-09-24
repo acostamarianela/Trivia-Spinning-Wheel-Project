@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   var progressBar = document.getElementById("progress-bar");
   var progressText = document.getElementById("progress-text");
-  var tiempoTotal = 30000; // 30 segundos
+  var tiempoTotal = 20000; // 30 segundos
   var tiempoRestante = tiempoTotal;
   var interval;
 
@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Iniciar la barra de progreso al cargar la página
-  progressBar.style.width = "100%"; // Comienza llena (verde)
-  progressBar.style.backgroundColor = "green"; // Color verde
+  progressBar.style.width = "100%"; // Comienza llena (naranja)
+  progressBar.style.backgroundColor = "orange"; // Color naranja
   interval = setInterval(actualizarBarra, 1000); // Actualizar cada segundo
 
   // Obtener todos los botones con la clase "button"
