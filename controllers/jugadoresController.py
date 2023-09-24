@@ -12,9 +12,19 @@ class jugadoresController:
         jugadores = self.jugadoresModel.listJugadores()
         
     def insertarJugador(self, nombre, apellido):
-        # Llama al método del modelo para insertar un nuevo jugador
-        self.jugadoresModel.insertarJugador(nombre, apellido)
+        # Llama al método del modelo para insertar un nuevo jugador y obtén el ID insertado
+        idJugador = self.jugadoresModel.insertarJugador(nombre, apellido)
 
-    def actualizarPuntajeJugador(self, idJugador, cantidadRespuestasCorrectas):
-        # Llamar al método del modelo para actualizar el puntaje de un jugador.
-        self.jugadoresModel.actualizarPuntajeJugador(idJugador, cantidadRespuestasCorrectas)
+        if idJugador is not None:
+            return idJugador  # Devuelve el ID del jugador insertado
+        else:
+            return None  # Maneja el caso de error
+
+    def actualizarPuntaje(self, idJugador, cantidadRespuestasCorrectas):  # Agrega 'self' como primer parámetro
+        try:
+            # Llama al modelo para actualizar el puntaje
+            self.jugadoresModel.actualizarPuntaje(idJugador, cantidadRespuestasCorrectas)  # Usa 'self' para acceder al modelo
+            return "Puntaje actualizado correctamente"
+        except Exception as e:
+            # Manejar cualquier excepción que pueda ocurrir
+            return str(e)
