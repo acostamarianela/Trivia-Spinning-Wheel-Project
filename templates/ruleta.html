@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> 
+    <script src="https://kit.fontawesome.com/1feb525019.js" crossorigin="anonymous"></script>
     <!-- cambiar sintaxis de esto -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/ruleta.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -10,22 +10,28 @@
 </head>
 <body>
     
-            
+        
     <div id="wheel">
         <div id="inner-wheel">
-            <div class="sec"> </div>
-            <div class="sec"></div>
-            <div class="sec"></div>
-            <div class="sec"></div>
-
-        </div>       
-        
+            <div class="sec">
+                <i class="fa fa-compact-disc icono"></i> <!--LANZAMIENTOS -->
+            </div>
+            <div class="sec">
+                <i class="fa fa-guitar icono"></i> <!--GÉNEROS-->
+            </div>
+            <div class="sec">
+                <i class="fa fa-flag icono"></i> <!--MUSICA NACIONAL-->
+            </div>
+            <div class="sec">
+                <i class="fa fa-globe icono"></i> <!--MUSICA INTERNACIONAL-->
+            </div>
+        </div>
+    </div>  
         <div id="spin">
             <div id="inner-spin"></div>
         </div>
-        
-
     </div>
+    
     <div class="menu">
         <h5 id="lanzamientos" class="categoria">
             <img src="https://www.colorhexa.com/eeff00.png" alt="mensaje" class="icono">

@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (tiempoRestante <= 0) {
       clearInterval(interval);
-      // Aquí puedes agregar el código para redireccionar a la página anterior
+      // Aquí regresa automáticamente a la página anterior en el historial de navegación
       window.history.back();
     }
   }
@@ -30,23 +30,40 @@ document.addEventListener("DOMContentLoaded", function () {
   progressBar.style.backgroundColor = "orange"; // Color naranja
   interval = setInterval(actualizarBarra, 1000); // Actualizar cada segundo
 
-  // Obtener todos los botones con la clase "button"
-  var botones = document.querySelectorAll(".button");
+  // Obtener el botón con la clase "correcta"
+  var botonRespuestaCorrecta = document.querySelector(".correcta");
 
-  // Agregar un controlador de eventos clic a cada botón
-  botones.forEach(function (boton) {
-    boton.addEventListener("click", function () {
-      // Verificar si el botón tiene la clase "correcta" o "incorrecta" y cambiar el color
-      if (boton.classList.contains("correcta")) {
-        boton.style.backgroundColor = "green";
-      } else if (boton.classList.contains("incorrecta")) {
-        boton.style.backgroundColor = "red";
-      }
-      boton.style.fontWeight = "bold";
-      // Deshabilitar todos los botones después de hacer clic
-      botones.forEach(function (b) {
-        b.disabled = true;
-      });
+  // Agregar un controlador de eventos clic al botón de respuesta correcta
+  botonRespuestaCorrecta.addEventListener("click", function () {
+    // Cambiar el color del botón de respuesta correcta a verde
+    botonRespuestaCorrecta.style.backgroundColor = "green";
+    botonRespuestaCorrecta.style.fontWeight = "bold";
+
+    // Deshabilitar todos los botones después de hacer clic
+    var botones = document.querySelectorAll(".button");
+    botones.forEach(function (boton) {
+      boton.disabled = true;
+    });
+
+    // Esperar unos segundos antes de volver automáticamente a la página anterior
+    setTimeout(function () {
+      window.history.back();
+    }, 1000); // Cambia el valor 1000 a la cantidad de milisegundos que desees esperar antes de volver atrás
+  });
+
+  // Obtener el botón con la clase "incorrecta"
+  var botonRespuestaIncorrecta = document.querySelector(".incorrecta");
+
+  // Agregar un controlador de eventos clic al botón de respuesta incorrecta
+  botonRespuestaIncorrecta.addEventListener("click", function () {
+    // Cambiar el color del botón de respuesta incorrecta a rojo
+    botonRespuestaIncorrecta.style.backgroundColor = "red";
+    botonRespuestaIncorrecta.style.fontWeight = "bold";
+
+    // Deshabilitar todos los botones después de hacer clic
+    var botones = document.querySelectorAll(".button");
+    botones.forEach(function (boton) {
+      boton.disabled = true;
     });
   });
 });
