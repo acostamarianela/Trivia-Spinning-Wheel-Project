@@ -3,7 +3,6 @@ from config import app
 from controllers.preguntasController import *
 from controllers.jugadoresController import jugadoresController 
 from flask import jsonify
-from flask_login import current_user  # Importa current_user desde Flask-Login
 
 @app.route('/')
 def index():
@@ -12,13 +11,17 @@ def index():
 @app.route('/pregunta', methods=['GET'])
 def obtenerPreguntas():
     categoria = request.args.get('categoria')
+    idJugador = request.args.get('idJugador')
+    print(idJugador)
     preguntas = PreguntasController()
     pregunta, respuestas = preguntas.getPreguntasPorCategoria(categoria)
-    return render_template('pregunta.html', pregunta=pregunta, respuestas=respuestas)
+    return render_template('pregunta.html', pregunta=pregunta, respuestas=respuestas, idJugador=idJugador)
 
-@app.route('/ruleta')
-def ruleta():
-    return render_template('ruleta.html')
+@app.route('/ruleta/<int:idJugador>')
+def ruleta(idJugador):
+    print(f'HOLA {idJugador}')
+    print(type(idJugador))
+    return render_template('ruleta.html', idJugador=idJugador)
 
 @app.route("/insertarJugador", methods=["POST"])
 def insertarJugador():
@@ -28,24 +31,24 @@ def insertarJugador():
     if nombre and apellido:
         controlador = jugadoresController()
         idJugador = controlador.insertarJugador(nombre, apellido)
-
-        if idJugador is not None:
+        #print(idJugador)
+        if idJugador is not None and isinstance(idJugador, int):
             # Redirige al usuario a la página de la ruleta y pasa el ID del jugador como parámetro
-            return redirect(url_for('ruleta', idJugador = idJugador))
-        
-    # Manejar el caso en que la inserción falló o los datos no estaban completos
-    return jsonify({"error": "Error al insertar jugador o datos incompletos"})
-
+            return redirect(url_for('ruleta', idJugador=idJugador))
+        else:
+            # Manejar el caso en que el ID del jugador no sea válido
+            return jsonify({"error": "ID de jugador no válido"})
 
 @app.route("/actualizarPuntaje", methods=["POST"])
 def actualizarPuntaje():
     try:
-        # Obtén el ID del jugador desde donde lo hayas almacenado (por ejemplo, en una cookie o variable de sesión)
-        # Reemplaza 'obtenerIdJugador()' con la lógica real para obtener el ID del jugador
-        idJugador = obtenerIdJugador()  # Reemplaza esto con tu lógica real
+        idJugador = request.form.get("idJugador")
 
-        if idJugador is not None:
-            cantidadRespuestasCorrectas = request.form.get("cantidadRespuestasCorrectas")
+        cantidadRespuestasCorrectas = request.form.get("cantidadRespuestasCorrectas")
+        print(idJugador)
+        if idJugador is not None and cantidadRespuestasCorrectas is not None:
+            # Convierte la ID del jugador a un entero (si es necesario)
+            idJugador = int(idJugador)
 
             # Crea una instancia del controlador de jugadores
             controlador = jugadoresController()
@@ -55,6 +58,6 @@ def actualizarPuntaje():
 
             return jsonify({"message": resultado})
         else:
-            return jsonify({"error": "ID del jugador no válido"})
+            return jsonify({"error": "Datos incompletos"})
     except Exception as e:
         return jsonify({"error": str(e)})

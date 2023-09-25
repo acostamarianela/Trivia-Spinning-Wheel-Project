@@ -1,10 +1,24 @@
 $(document).ready(function(){
+    function obtenerIdJugador() {
+        return new Promise(function(resolve, reject) {
+            // Obtener la ID del jugador desde la URL actual
+            var url = window.location.href;
+            var urlSegments = url.split('/');
+            var idJugador = urlSegments[urlSegments.length - 1]; // El último segmento es el idJugador
+            
+            if (idJugador) {
+                // Resuelve la promesa con el ID del jugador
+                resolve(idJugador);
+            } else {
+                // Rechaza la promesa con un error
+                reject(new Error("ID de jugador no encontrado en la URL"));
+            }
+        });
+    }
+    
     // Set default degree (360*4)
     var degree = 1440;
-    // Number of clicks = 0
     var clicks = 0;
-
-    // Variable para almacenar los grados actuales
     var gradosActuales = 0;
 
     /*WHEEL SPIN FUNCTION*/
@@ -35,21 +49,28 @@ $(document).ready(function(){
             var seccionDespuesDeAnimacion = Math.floor((gradosActuales + 45) / 90) % 4;
 
             console.log('La flecha está apuntando a la sección:', seccionDespuesDeAnimacion);
-            console.log(typeof seccionDespuesDeAnimacion);
-            // Envía la categoría al servidor Flask y obtén una pregunta aleatoria
-            enviarCategoria(seccionDespuesDeAnimacion);
+
+            // Obtén el ID del jugador y luego envía la categoría al servidor Flask
+            obtenerIdJugador()
+                .then(function(idJugador) {
+                    enviarCategoria(seccionDespuesDeAnimacion, idJugador);
+                })
+                .catch(function(error) {
+                    console.error('Error al obtener el ID del jugador:', error);
+                });
         }, 4000); // 4000 milisegundos (4 segundos) es la duración de la animación
     });
 });
 
-function enviarCategoria(categoria) {
+function enviarCategoria(categoria, idJugador) {
     $.ajax({
         type: 'GET',
         url: '/pregunta',
-        data: { categoria: categoria },
+        data: { categoria: categoria, idJugador: idJugador},
         success: function(response) {
-            console.log('Pregunta aleatoria:', response);
-            window.location.href = '/pregunta?categoria=' + categoria;
+            console.log(idJugador); 
+            //console.log('Pregunta aleatoria:', response);
+            window.location.href = '/pregunta?categoria=' + categoria + '&idJugador=' + idJugador;
 
         },
         error: function(error) {
@@ -57,5 +78,3 @@ function enviarCategoria(categoria) {
         }
     });
 }
-
-	

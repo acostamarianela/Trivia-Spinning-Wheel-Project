@@ -5,10 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var tiempoRestante = tiempoTotal;
   var interval;
   var puntajeJugador = 0;
-  var idJugador; // Variable para almacenar el ID del jugador
-
-  // Llamar a esta función para obtener el ID del jugador
-  obtenerIdJugador();
+  var idJugador = obtenerIdJugador();
 
   // Función para actualizar la barra de progreso
   function actualizarBarra() {
@@ -35,45 +32,30 @@ document.addEventListener("DOMContentLoaded", function () {
   progressBar.style.backgroundColor = "orange";
   interval = setInterval(actualizarBarra, 1000);
 
-  // Obtener el botón con la clase "correcta"
-  var botonRespuestaCorrecta = document.querySelector(".correcta");
 
-  // Agregar un controlador de eventos clic al botón de respuesta correcta
-  botonRespuestaCorrecta.addEventListener("click", function () {
-    // Cambiar el color del botón de respuesta correcta a verde
-    botonRespuestaCorrecta.style.backgroundColor = "green";
-    botonRespuestaCorrecta.style.fontWeight = "bold";
+  // Obtener todos los botones con la clase "button"
+  var botones = document.querySelectorAll(".button");
 
-    // Incrementar el puntaje del jugador
-    puntajeJugador++; // Aumentar el puntaje en 1
-
-    // Deshabilitar todos los botones después de hacer clic
-    var botones = document.querySelectorAll(".button");
-    botones.forEach(function (boton) {
-      boton.disabled = true;
+  // Agregar un controlador de eventos clic a cada botón
+  botones.forEach(function (boton) {
+    
+    boton.addEventListener("click", function () {
+      // Verificar si el botón tiene la clase "correcta" o "incorrecta" y cambiar el color
+      if (boton.classList.contains("correcta")) {
+        boton.style.backgroundColor = "green";
+        puntajeJugador++; // Aumentar el puntaje en 1
+        // Realizar la solicitud fetch para actualizar el puntaje del jugador
+        actualizarPuntaje(puntajeJugador, idJugador);
+      } else if (boton.classList.contains("incorrecta")) {
+        boton.style.backgroundColor = "red";
+        actualizarPuntaje(puntajeJugador, idJugador);
+      }
+      boton.style.fontWeight = "bold";
+      // Deshabilitar todos los botones después de hacer clic
+      botones.forEach(function (b) {
+        b.disabled = true;
+      });
     });
-
-    // Realizar la solicitud fetch para actualizar el puntaje del jugador
-    actualizarPuntaje(puntajeJugador, idJugador);
-  });
-
-  // Obtener el botón con la clase "incorrecta"
-  var botonRespuestaIncorrecta = document.querySelector(".incorrecta");
-
-  // Agregar un controlador de eventos clic al botón de respuesta incorrecta
-  botonRespuestaIncorrecta.addEventListener("click", function () {
-    // Cambiar el color del botón de respuesta incorrecta a rojo
-    botonRespuestaIncorrecta.style.backgroundColor = "red";
-    botonRespuestaIncorrecta.style.fontWeight = "bold";
-
-    // Deshabilitar todos los botones después de hacer clic
-    var botones = document.querySelectorAll(".button");
-    botones.forEach(function (boton) {
-      boton.disabled = true;
-    });
-
-    // Realizar la solicitud fetch para actualizar el puntaje del jugador
-    actualizarPuntaje(puntajeJugador, idJugador);
   });
 
   // Función para realizar la solicitud fetch y actualizar el puntaje del jugador en el servidor
@@ -103,25 +85,18 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // Función para obtener el ID del jugador desde el servidor
   function obtenerIdJugador() {
-    fetch("/obtenerIdJugador")
-      .then(function (response) {
-        if (response.ok) {
-          return response.json();
-        } else {
-          console.error("Error al obtener el ID del jugador");
-        }
-      })
-      .then(function (data) {
-        if (data && data.idJugador) {
-          idJugador = data.idJugador; // Almacena el ID del jugador
-        } else {
-          console.error("ID de jugador no encontrado en la respuesta del servidor");
-        }
-      })
-      .catch(function (error) {
-        console.error("Error de red:", error);
-      });
-  }
+    // Obtener la ID del jugador desde la URL actual
+    var url = window.location.href;
+    var urlSearchParams = new URLSearchParams(url);
+    var idJugador = urlSearchParams.get('idJugador');
+
+    if (idJugador) {
+        // Almacena el ID del jugador y devuelve el valor
+        console.log("ID del jugador desde la URL:", idJugador);
+        return idJugador;
+    } else {
+        console.error("ID de jugador no encontrado en la URL");
+        return null;
+    }}
 });

@@ -9,10 +9,6 @@ class PreguntasController:
         self.error = None
 
     def getPreguntasPorCategoria(self, categoria):
-        # Esta función podría consultar una base de datos u otro origen de datos
-        # para obtener preguntas según la categoría y devolverlas en una lista.
-        # Aquí simulamos preguntas de ejemplo.
-        
         categoria = int(categoria)
         if categoria == 0:
             categoria = 'MUSICA INTERNACIONAL'

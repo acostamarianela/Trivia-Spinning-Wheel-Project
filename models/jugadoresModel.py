@@ -20,13 +20,13 @@ class jugadoresModel():
     def insertarJugador(self, nombre, apellido):
         try:
             with self.database.cursor() as cursor:
-                sqlInsertarJugador = "INSERT INTO jugadores (nombreJugador, apellidoJugador, CantidadRespuestasCorrectas) VALUES (%s, %s, 0);"
+                sqlInsertarJugador = "INSERT INTO jugadores (nombreJugador, apellidoJugador, cantidadRespuestasCorrectas) VALUES (%s, %s, 0);"
                 cursor.execute(sqlInsertarJugador, (nombre, apellido))
                 self.database.commit()
 
                 # Obtén el ID del jugador insertado
                 idJugador = cursor.lastrowid  # Esto obtiene el ID generado automáticamente
-
+                print(idJugador)
                 # Devuelve el ID al cliente (puedes enviarlo como JSON o en otro formato)
                 return idJugador
 
@@ -37,7 +37,7 @@ class jugadoresModel():
     def actualizarPuntaje(self, idJugador, cantidadRespuestasCorrectas):  # Agrega 'self' como primer parámetro
         try:
             with self.database.cursor() as cursor:
-                sqlActualizarPuntaje = "UPDATE jugadores SET CantidadRespuestasCorrectas = %s WHERE idJugador = %s;"
+                sqlActualizarPuntaje = "UPDATE jugadores SET cantidadRespuestasCorrectas = %s WHERE idJugador = %s;"
                 cursor.execute(sqlActualizarPuntaje, (cantidadRespuestasCorrectas, idJugador))
                 self.database.commit()  # Asegúrate de realizar el commit
             return "Puntaje actualizado correctamente"
