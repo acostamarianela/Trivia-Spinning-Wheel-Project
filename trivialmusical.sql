@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-09-2023 a las 01:05:51
+-- Tiempo de generación: 26-09-2023 a las 18:13:58
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -54,39 +54,6 @@ CREATE TABLE `jugadores` (
   `apellidoJugador` varchar(50) NOT NULL,
   `cantidadRespuestasCorrectas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `jugadores`
---
-
-INSERT INTO `jugadores` (`idJugador`, `nombreJugador`, `apellidoJugador`, `cantidadRespuestasCorrectas`) VALUES
-(1, 'Abril', 'Zacarias', 0),
-(7, 'Abril', 'Zacarias', 0),
-(18, 'Abril', 'Zacarias', 0),
-(24, 'Abril', 'Zacarias', 0),
-(33, 'Abril', 'Zacarias', 0),
-(34, 'Abril', 'Zacarias', 0),
-(36, 'Abril', 'Zacarias', 0),
-(37, 'Abril', 'Zacarias', 0),
-(38, 'Abril', 'Zacarias', 0),
-(39, 'Abril', 'Zacarias', 0),
-(40, 'Abril', 'Zacarias', 0),
-(41, 'Abril', 'Zacarias', 0),
-(42, 'Abril', 'Zacarias', 0),
-(43, 'Abril', 'Zacarias', 0),
-(44, 'Abril', 'Zacarias', 0),
-(45, 'Abril', 'Zacarias', 0),
-(46, 'Abril', 'Zacarias', 0),
-(47, 'Abril', 'Zacarias', 0),
-(48, 'Abril', 'Zacarias', 0),
-(49, 'Abril', 'Zacarias', 0),
-(50, 'Abril', 'Zacarias', 0),
-(51, 'marianela', 'acosta', 0),
-(52, 'Abril', 'Zacarias', 0),
-(53, 'marianela', 'acosta', 1),
-(54, 'aldo', 'ortega', 1),
-(55, 'Paula', 'Villalba', 0),
-(56, 'Abril', 'Zacarias', 0);
 
 -- --------------------------------------------------------
 
@@ -167,7 +134,20 @@ INSERT INTO `preguntas` (`idPregunta`, `descripcionPregunta`, `idCategoria`) VAL
 (60, '\"Livin\' la vida loca\" es un sencillo lanzado por un reconocido cantante  puertorriqueño-estadounidense, ¿de quién se trata?', 4),
 (74, '¿Cuál es el título de la canción del artista WOS que fue utilizada durante el Mundial Qatar 2022?', 3),
 (75, '¿Qué grupo de Rock Clásico era conocido por estar drogados durante sus primeros conciertos?', 4),
-(76, '¿A qué famoso videojuego hace referencia el título de la última canción de la cantante Emilia Mernes?', 3);
+(76, '¿A qué famoso videojuego hace referencia el título de la última canción de la cantante Emilia Mernes?', 3),
+(77, '¿Qué intérprete del género RKT fue arrestado y luego liberado?', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `preguntasrespondidas`
+--
+
+CREATE TABLE `preguntasrespondidas` (
+  `idRespuestaJugador` int(11) NOT NULL,
+  `idJugador` int(11) DEFAULT NULL,
+  `idPregunta` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -438,7 +418,11 @@ INSERT INTO `respuestas` (`idRespuesta`, `descripcionRespuesta`, `correcta`, `id
 (249, 'Counter Strike 1.6', 0, 76),
 (250, 'Call of Duty', 0, 76),
 (251, 'Los Sims', 0, 76),
-(252, 'GTA', 1, 76);
+(252, 'GTA', 1, 76),
+(253, 'Callejero Fino', 0, 77),
+(254, 'Lauty Gram', 0, 77),
+(255, 'L-Gante', 1, 77),
+(256, 'El Noba ', 0, 77);
 
 --
 -- Índices para tablas volcadas
@@ -464,6 +448,14 @@ ALTER TABLE `preguntas`
   ADD KEY `idCategoria` (`idCategoria`) USING BTREE;
 
 --
+-- Indices de la tabla `preguntasrespondidas`
+--
+ALTER TABLE `preguntasrespondidas`
+  ADD PRIMARY KEY (`idRespuestaJugador`),
+  ADD UNIQUE KEY `uniqueRespuestaJugador` (`idJugador`,`idPregunta`),
+  ADD KEY `idPregunta` (`idPregunta`);
+
+--
 -- Indices de la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
@@ -484,19 +476,25 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `idJugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `idJugador` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+
+--
+-- AUTO_INCREMENT de la tabla `preguntasrespondidas`
+--
+ALTER TABLE `preguntasrespondidas`
+  MODIFY `idRespuestaJugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
-  MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
+  MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
 
 --
 -- Restricciones para tablas volcadas
@@ -507,6 +505,13 @@ ALTER TABLE `respuestas`
 --
 ALTER TABLE `preguntas`
   ADD CONSTRAINT `preguntas_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`idCategoria`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `preguntasrespondidas`
+--
+ALTER TABLE `preguntasrespondidas`
+  ADD CONSTRAINT `preguntasrespondidas_ibfk_1` FOREIGN KEY (`idJugador`) REFERENCES `jugadores` (`idJugador`),
+  ADD CONSTRAINT `preguntasrespondidas_ibfk_2` FOREIGN KEY (`idPregunta`) REFERENCES `preguntas` (`idPregunta`);
 
 --
 -- Filtros para la tabla `respuestas`
