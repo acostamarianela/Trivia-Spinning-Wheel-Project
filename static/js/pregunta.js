@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   progressBar.style.backgroundColor = "orange";
   interval = setInterval(actualizarBarra, 1000);
 
-
   // Obtener todos los botones con la clase "button"
   var botones = document.querySelectorAll(".button");
 
@@ -75,7 +74,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     
   });
 
-  // Función para realizar la solicitud fetch y actualizar el puntaje del jugador en el servidor
 // Función para realizar la solicitud fetch y actualizar el puntaje del jugador en el servidor
 async function actualizarPuntaje(puntaje, idJugador) {
   try {
@@ -118,9 +116,3 @@ async function actualizarPuntaje(puntaje, idJugador) {
   }
 }
 });
-
-
-
-
-
-

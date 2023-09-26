@@ -62,5 +62,4 @@ $(document).ready(function(){
         }, 4000); // 4000 milisegundos (4 segundos) es la duración de la animación
     });
 
-    // Otras partes de tu código...
 });

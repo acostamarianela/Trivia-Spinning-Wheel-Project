@@ -1,12 +1,8 @@
 from models.preguntasModel import PreguntasModel
-from flask import flash, redirect, url_for
-import random
-from config import app, mysql
 
 class PreguntasController:
     def __init__(self):
         self.preguntasModel = PreguntasModel()
-        self.error = None
 
     def getPreguntasPorCategoria(self, categoria, idJugador):
         categoria = int(categoria)

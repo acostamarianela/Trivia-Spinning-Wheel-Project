@@ -1,6 +1,4 @@
 from models.jugadoresModel import jugadoresModel
-from flask import flash, redirect, url_for
-from config import app, mysql
 
 class jugadoresController:
     def __init__(self):
@@ -42,9 +40,7 @@ class jugadoresController:
         try:
             # Llama al método del modelo para obtener el puntaje
             puntaje = self.jugadoresModel.obtenerPuntaje(idJugador)
-            print(f'holaCONTROLADOR {puntaje}')
             if puntaje is not None:
-                print(f'Puntaje obtenido: {puntaje}')
                 return puntaje
             else:
                 print('Puntaje no encontrado para el jugador.')
