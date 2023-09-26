@@ -42,7 +42,13 @@ class jugadoresController:
         try:
             # Llama al método del modelo para obtener el puntaje
             puntaje = self.jugadoresModel.obtenerPuntaje(idJugador)
-            return puntaje
+            print(f'holaCONTROLADOR {puntaje}')
+            if puntaje is not None:
+                print(f'Puntaje obtenido: {puntaje}')
+                return puntaje
+            else:
+                print('Puntaje no encontrado para el jugador.')
+                return None
         except Exception as e:
-            # Manejar cualquier excepción que pueda ocurrir
+            print(f'Error al obtener puntaje: {str(e)}')
             return None

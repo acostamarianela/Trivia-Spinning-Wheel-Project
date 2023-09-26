@@ -47,12 +47,13 @@ class jugadoresModel():
             with self.database.cursor() as cursor:
                 sqlObtenerPuntaje = "SELECT cantidadRespuestasCorrectas FROM jugadores WHERE idJugador = %s;"
                 cursor.execute(sqlObtenerPuntaje, (idJugador,))
-                resultado = cursor.fetchone()  # Obtenemos el resultado de la consulta
+                resultado = cursor.fetchone()
                 if resultado:
-                    puntaje = resultado['cantidadRespuestasCorrectas']
+                    puntaje = resultado[0]
+                    print(f'Puntaje obtenido desde la base de datos: {puntaje}')
                     return puntaje
                 else:
-                    return None  # Si no se encuentra el jugador, puedes devolver None
+                    return None
         except Exception as e:
-            # Manejar cualquier excepción que pueda ocurrir, como errores de base de datos
+            print(f'Error en la consulta de obtenerPuntaje: {str(e)}')
             return None

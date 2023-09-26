@@ -44,27 +44,50 @@ def insertarJugador():
 def actualizarPuntaje():
     try:
         idJugador = request.form.get("idJugador")
-
         cantidadRespuestasCorrectas = request.form.get("cantidadRespuestasCorrectas")
         
-        print(idJugador)
-        print(f"Cantidad de respuestas correctas: {cantidadRespuestasCorrectas}")
         if idJugador is not None and cantidadRespuestasCorrectas is not None:
-            # Convierte la ID del jugador a un entero (si es necesario)
+            # Convierte la ID del jugador y la cantidad de respuestas correctas a entero
             idJugador = int(idJugador)
-
-            # Crea una instancia del controlador de jugadores
+            cantidadRespuestasCorrectas = int(cantidadRespuestasCorrectas)
             controlador = jugadoresController()
+            # Obtén el puntaje actual del jugador desde la base de datos
+            puntaje_actual = controlador.obtenerPuntaje(idJugador)
+            print(f"Puntaje actual: {puntaje_actual}")
 
-            # Llama al controlador para actualizar el puntaje del jugador
-            resultado = controlador.actualizarPuntaje(idJugador, cantidadRespuestasCorrectas)
+            # Suma la cantidad de respuestas correctas al puntaje actual
+            puntaje_actual += 1
 
-            return jsonify({"message": resultado})
+            # Actualiza el puntaje en la base de datos
+            resultado = controlador.actualizarPuntaje(idJugador, puntaje_actual)
+            print(f"Puntaje después de la actualización: {puntaje_actual}")
+
+            if resultado:
+                return jsonify({"message": "Puntaje actualizado correctamente"})
+            else:
+                return jsonify({"error": "Error al actualizar el puntaje"})
         else:
             return jsonify({"error": "Datos incompletos"})
     except Exception as e:
         return jsonify({"error": str(e)})
-    
+
+
+
+@app.route('/obtenerPuntaje', methods=['GET'])
+def obtenerPuntaje():
+    idJugador = request.args.get('idJugador')
+    print(f'idJugadorOBTENER {idJugador}')
+    try:
+        controlador = jugadoresController()
+        puntaje = controlador.obtenerPuntaje(idJugador)
+        if puntaje is not None:
+            print(f'holaROUTES {puntaje}') 
+            return jsonify({"idJugador": idJugador, "puntaje": puntaje})
+        else:
+            return jsonify({"error": "Puntaje no encontrado"})  # Devuelve un mensaje de error en formato JSON
+    except Exception as e:
+        # Manejar cualquier excepción que pueda ocurrir
+        return jsonify({"error": str(e)})
 
 @app.route('/listarJugadores')
 def listarJugadores():
