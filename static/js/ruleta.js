@@ -21,7 +21,7 @@ $(document).ready(function(){
     var clicks = 0;
     var gradosActuales = 0;
 
-    /*WHEEL SPIN FUNCTION*/
+    /WHEEL SPIN FUNCTION/
     $('#spin').click(function(){
         // Incrementa en 1 con cada clic
         clicks++;
