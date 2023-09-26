@@ -45,7 +45,9 @@ def actualizarPuntaje():
         idJugador = request.form.get("idJugador")
 
         cantidadRespuestasCorrectas = request.form.get("cantidadRespuestasCorrectas")
+        
         print(idJugador)
+        print(f"Cantidad de respuestas correctas: {cantidadRespuestasCorrectas}")
         if idJugador is not None and cantidadRespuestasCorrectas is not None:
             # Convierte la ID del jugador a un entero (si es necesario)
             idJugador = int(idJugador)
@@ -61,3 +63,16 @@ def actualizarPuntaje():
             return jsonify({"error": "Datos incompletos"})
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+
+@app.route('/listarJugadores')
+def listarJugadores():
+    # Crea una instancia del controlador de jugadores
+    controlador = jugadoresController()
+
+    # Llama al método para obtener la lista de jugadores desde el controlador
+    jugadores = controlador.listarJugadores()
+
+    # Renderiza la plantilla HTML y pasa los datos de los jugadores como argumento
+    return render_template('jugadores.html', jugadores=jugadores)
+

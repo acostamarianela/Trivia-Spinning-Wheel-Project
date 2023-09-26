@@ -5,14 +5,11 @@ class jugadoresModel():
     def __init__(self):
         self.database = mysql.connection
 
-
-    def listJugadores(self):
-        #Crear un cursor para ejecutar consultas usando el bloque with.
+    def listarJugadores(self):
+        # Crear un cursor para ejecutar consultas usando el bloque with.
         with self.database.cursor() as cursor:
-            
             sqlListarJugadores = "SELECT * FROM jugadores;"
             cursor.execute(sqlListarJugadores)
-            
             # Guardar en la variable resultados todos los resultados devueltos por la consulta.
             resultados = cursor.fetchall()
         return resultados
@@ -23,7 +20,7 @@ class jugadoresModel():
                 sqlInsertarJugador = "INSERT INTO jugadores (nombreJugador, apellidoJugador, cantidadRespuestasCorrectas) VALUES (%s, %s, 0);"
                 cursor.execute(sqlInsertarJugador, (nombre, apellido))
                 self.database.commit()
-
+    
                 # Obtén el ID del jugador insertado
                 idJugador = cursor.lastrowid  # Esto obtiene el ID generado automáticamente
                 print(idJugador)
@@ -44,3 +41,18 @@ class jugadoresModel():
         except Exception as e:
             # Manejar cualquier excepción que pueda ocurrir, como errores de base de datos
             return str(e)
+        
+    def obtenerPuntaje(self, idJugador):
+        try:
+            with self.database.cursor() as cursor:
+                sqlObtenerPuntaje = "SELECT cantidadRespuestasCorrectas FROM jugadores WHERE idJugador = %s;"
+                cursor.execute(sqlObtenerPuntaje, (idJugador,))
+                resultado = cursor.fetchone()  # Obtenemos el resultado de la consulta
+                if resultado:
+                    puntaje = resultado['cantidadRespuestasCorrectas']
+                    return puntaje
+                else:
+                    return None  # Si no se encuentra el jugador, puedes devolver None
+        except Exception as e:
+            # Manejar cualquier excepción que pueda ocurrir, como errores de base de datos
+            return None

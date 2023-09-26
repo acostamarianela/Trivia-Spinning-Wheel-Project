@@ -8,8 +8,13 @@ class jugadoresController:
         self.error = None
 
     def listarJugadores(self):
-        # Llamar al método del modelo para listar jugadores.
-        jugadores = self.jugadoresModel.listJugadores()
+        try:
+            # Llamar al método del modelo para listar jugadores.
+            jugadores = self.jugadoresModel.listarJugadores()
+            return jugadores  # Devuelve la lista de jugadores
+        except Exception as e:
+            # Manejar cualquier excepción que pueda ocurrir
+            return None
         
     def insertarJugador(self, nombre, apellido):
         try:
@@ -24,8 +29,6 @@ class jugadoresController:
             # Manejar cualquier excepción que pueda ocurrir
             return None
 
-
-
     def actualizarPuntaje(self, idJugador, cantidadRespuestasCorrectas):  # Agrega 'self' como primer parámetro
         try:
             # Llama al modelo para actualizar el puntaje
@@ -34,3 +37,12 @@ class jugadoresController:
         except Exception as e:
             # Manejar cualquier excepción que pueda ocurrir
             return str(e)
+        
+    def obtenerPuntaje(self, idJugador):
+        try:
+            # Llama al método del modelo para obtener el puntaje
+            puntaje = self.jugadoresModel.obtenerPuntaje(idJugador)
+            return puntaje
+        except Exception as e:
+            # Manejar cualquier excepción que pueda ocurrir
+            return None

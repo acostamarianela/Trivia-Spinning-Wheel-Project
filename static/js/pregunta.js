@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var tiempoTotal = 20000; // 20 segundos
   var tiempoRestante = tiempoTotal;
   var interval;
-  var puntajeJugador = 0;
+  var puntajeJugador = 0; // Inicializa el puntaje en 0
   var idJugador = obtenerIdJugador();
 
   // Función para actualizar la barra de progreso
@@ -45,10 +45,11 @@ document.addEventListener("DOMContentLoaded", function () {
         boton.style.backgroundColor = "green";
         puntajeJugador++; // Aumentar el puntaje en 1
         // Realizar la solicitud fetch para actualizar el puntaje del jugador
+        console.log("Puntaje actual: " + puntajeJugador); // Imprimir el puntaje actual en la consola
         actualizarPuntaje(puntajeJugador, idJugador);
       } else if (boton.classList.contains("incorrecta")) {
         boton.style.backgroundColor = "red";
-        actualizarPuntaje(puntajeJugador, idJugador);
+        window.location.href = '/listarJugadores';
       }
       boton.style.fontWeight = "bold";
       // Deshabilitar todos los botones después de hacer clic
@@ -100,3 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return null;
     }}
 });
+
+
+
+

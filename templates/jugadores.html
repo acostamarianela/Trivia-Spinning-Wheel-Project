@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (resto de las etiquetas head) -->
+</head>
+<body>
+    <h1>Tabla de Jugadores</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Puntaje</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jugador in jugadores %}
+                <tr>
+                    <td>{{ jugador[0] }}</td>
+                    <td>{{ jugador[1] }}</td>
+                    <td>{{ jugador[2] }}</td>
+                    <td>{{ jugador[3] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
