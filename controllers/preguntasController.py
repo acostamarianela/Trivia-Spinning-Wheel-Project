@@ -8,7 +8,7 @@ class PreguntasController:
         self.preguntasModel = PreguntasModel()
         self.error = None
 
-    def getPreguntasPorCategoria(self, categoria):
+    def getPreguntasPorCategoria(self, categoria, idJugador):
         categoria = int(categoria)
         if categoria == 0:
             categoria = 'MUSICA INTERNACIONAL'
@@ -21,7 +21,7 @@ class PreguntasController:
         else:
             return []
 
-        preguntas = self.preguntasModel.listPreguntasPorCategoria(categoria)
+        preguntas = self.preguntasModel.listPreguntasPorCategoria(categoria, idJugador)
 
         print(preguntas)
         return preguntas

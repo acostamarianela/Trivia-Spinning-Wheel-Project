@@ -14,8 +14,9 @@ def obtenerPreguntas():
     idJugador = request.args.get('idJugador')
     print(idJugador)
     preguntas = PreguntasController()
-    pregunta, respuestas = preguntas.getPreguntasPorCategoria(categoria)
+    pregunta, respuestas = preguntas.getPreguntasPorCategoria(categoria, idJugador)
     return render_template('pregunta.html', pregunta=pregunta, respuestas=respuestas, idJugador=idJugador)
+
 
 @app.route('/ruleta/<int:idJugador>')
 def ruleta(idJugador):

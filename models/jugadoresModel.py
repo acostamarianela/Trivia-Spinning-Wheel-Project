@@ -23,7 +23,7 @@ class jugadoresModel():
                 sqlInsertarJugador = "INSERT INTO jugadores (nombreJugador, apellidoJugador, cantidadRespuestasCorrectas) VALUES (%s, %s, 0);"
                 cursor.execute(sqlInsertarJugador, (nombre, apellido))
                 self.database.commit()
-
+    
                 # Obtén el ID del jugador insertado
                 idJugador = cursor.lastrowid  # Esto obtiene el ID generado automáticamente
                 print(idJugador)

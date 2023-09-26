@@ -1,4 +1,3 @@
-from datetime import datetime
 from config import mysql
 
 class PreguntasModel:
@@ -19,33 +18,49 @@ class PreguntasModel:
 
         return resultados
     
-    def listPreguntasPorCategoria(self, categoria):
+    def listPreguntasPorCategoria(self, categoria, idJugador):
         with self.database.cursor() as cursor:
+            # Consulta para obtener una pregunta aleatoria que aún no ha sido respondida por el usuario
             consulta = """
             SELECT p.descripcionPregunta
             FROM preguntas p
             JOIN categoria c ON p.idCategoria = c.idCategoria
+            LEFT JOIN preguntasrespondidas pr ON p.idPregunta = pr.idPregunta AND pr.idJugador = %s
             WHERE c.descripcionCategoria = %s
+            AND pr.idPregunta IS NULL  -- Verifica que el usuario no haya respondido esta pregunta
             ORDER BY RAND()
             LIMIT 1
             """
-            cursor.execute(consulta, (categoria,))
+
+            cursor.execute(consulta, (idJugador, categoria,))
             fila = cursor.fetchone()
             if fila:
-                pregunta_aleatoria = fila[0]
+                preguntaAleatoria = fila[0]
             else:
-                pregunta_aleatoria = None
-
-        if pregunta_aleatoria:
-            # Una vez que tengas la pregunta aleatoria, busca todas sus respuestas
+                preguntaAleatoria = None
+        print(preguntaAleatoria)
+        if preguntaAleatoria:
+            # Una vez que tengas la pregunta aleatoria, registra que el usuario la ha respondido
             with self.database.cursor() as cursor:
-                consulta_respuestas = """
+                # Inserta un registro en la tabla respuestas_usuario para marcar que el usuario ha respondido esta pregunta
+                insertarRespuestaJugador = """
+                INSERT INTO preguntasrespondidas (idJugador, idPregunta)
+                SELECT %s, p.idPregunta
+                FROM preguntas p
+                WHERE p.descripcionPregunta = %s
+                """
+                cursor.execute(insertarRespuestaJugador, (idJugador, preguntaAleatoria))
+                self.database.commit()
+                
+            # Luego, busca todas las respuestas asociadas a la pregunta
+            with self.database.cursor() as cursor:
+                consultaRespuestas = """
                 SELECT r.descripcionRespuesta, r.correcta
                 FROM respuestas r
                 JOIN preguntas p ON r.idPregunta = p.idPregunta
                 WHERE p.descripcionPregunta = %s
                 """
-                cursor.execute(consulta_respuestas, (pregunta_aleatoria,))
+                cursor.execute(consultaRespuestas, (preguntaAleatoria,))
                 respuestas = []
                 for fila in cursor.fetchall():
                     respuesta, correcta = fila
@@ -56,6 +71,4 @@ class PreguntasModel:
         else:
             respuestas = []
 
-        return pregunta_aleatoria, respuestas
-    
-    
+        return preguntaAleatoria, respuestas

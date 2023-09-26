@@ -53,28 +53,14 @@ $(document).ready(function(){
             // Obtén el ID del jugador y luego envía la categoría al servidor Flask
             obtenerIdJugador()
                 .then(function(idJugador) {
-                    enviarCategoria(seccionDespuesDeAnimacion, idJugador);
+                    // Ejecuta la redirección directamente aquí
+                    window.location.href = '/pregunta?categoria=' + seccionDespuesDeAnimacion + '&idJugador=' + idJugador;
                 })
                 .catch(function(error) {
                     console.error('Error al obtener el ID del jugador:', error);
                 });
         }, 4000); // 4000 milisegundos (4 segundos) es la duración de la animación
     });
+
+    // Otras partes de tu código...
 });
-
-function enviarCategoria(categoria, idJugador) {
-    $.ajax({
-        type: 'GET',
-        url: '/pregunta',
-        data: { categoria: categoria, idJugador: idJugador},
-        success: function(response) {
-            console.log(idJugador); 
-            //console.log('Pregunta aleatoria:', response);
-            window.location.href = '/pregunta?categoria=' + categoria + '&idJugador=' + idJugador;
-
-        },
-        error: function(error) {
-            console.error('Error al enviar la categoría:', error);
-        }
-    });
-}
